@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Items - Profiter Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #2F80ED 0%, #225291 100%);
+        }
+
+        .btn-primary {
+            background: #2F80ED;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1f6fd1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(47, 128, 237, 0.4);
+        }
+
+        .property-card {
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-pill {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-pill:hover {
+            transform: translateY(-2px);
+        }
+
+        .category-pill.active {
+            background: #2F80ED;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                        <span class="text-xl font-bold text-gray-900">PROFITER</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">Home</a>
+                    <a href="listings.html" class="text-[#2F80ED] font-medium">Browse Items</a>
+                    <a href="how-it-works.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">How It Works</a>
+                    <a href="contact-us.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="login.html"
+                        class="hidden md:block px-4 py-2 text-[#2F80ED] font-semibold hover:bg-blue-50 rounded-lg">Sign
+                        In</a>
+                    <a href="list_item.html" class="btn-primary px-4 py-2 text-white font-semibold rounded-lg">List Your Item</a>
+                    <button class="md:hidden text-gray-700"><i class="fas fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <h1 class="text-4xl font-bold mb-2">Browse All Items</h1>
+            <p class="text-white/90">Find the perfect rental for your December events</p>
+        </div>
+    </section>
+
+    <!-- Filters & Items -->
+    <section class="py-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <!-- Search & Sort -->
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2">
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="searchInput" type="text" placeholder="Search items..."
+                                class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                        </div>
+                    </div>
+                    <select id="sortSelect"
+                        class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                        <option value="default">Sort by: Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+                <div id="categoriesContainer" class="flex flex-wrap gap-3"></div>
+            </div>
+
+            <!-- Items Count -->
+            <div class="mb-6">
+                <p class="text-gray-600"><span id="itemCount">0</span> items available</p>
+            </div>
+
+            <!-- Items Grid -->
+            <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+            <!-- No Results -->
+            <div id="noResults" class="hidden text-center py-12">
+                <i class="fas fa-search text-gray-300 text-6xl mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">No items found</h3>
+                <p class="text-gray-500">Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                    <span class="text-xl font-bold text-white">PROFITER</span>
+                </div>
+                <p class="mb-4">Your trusted rental platform for December and beyond.</p>
+                <div class="flex gap-3">
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i
+                            class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                <ul>
+                    <li class="mb-2"><a href="index.html" class="hover:text-white">Home</a></li>
+                    <li class="mb-2"><a href="listings.html" class="hover:text-white">Browse Items</a></li>
+                    <li class="mb-2"><a href="how-it-works.html" class="hover:text-white">How It Works</a></li>
+                    <li class="mb-2"><a href="contact-us.html" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Support</h4>
+                <ul>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Help Center</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Terms of Service</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">FAQs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Contact Us</h4>
+                <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Rental St, Lagos, Nigeria</p>
+                <p class="mb-2"><i class="fas fa-phone mr-2"></i> +234 800 123 4567</p>
+                <p><i class="fas fa-envelope mr-2"></i>Email: profiter.ih@gmail.com</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-4 text-center">
+            <p>&copy; 2024 PROFITER Rentals. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const items = [
+            { id: 1, name: "Toyota Camry 2022", category: "Cars", location: "Lekki, Lagos", price: 25000, period: "day", image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400", status: "available", icon: "car" },
+            { id: 2, name: "Honda Accord 2023", category: "Cars", location: "Ikeja, Lagos", price: 30000, period: "day", image: "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400", status: "available", icon: "car" },
+            { id: 3, name: "Lexus ES 350", category: "Cars", location: "Victoria Island, Lagos", price: 45000, period: "day", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400", status: "few-left", icon: "car" },
+            { id: 4, name: "Mercedes-Benz C-Class", category: "Cars", location: "Lekki Phase 1, Lagos", price: 55000, period: "day", image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400", status: "available", icon: "car" },
+            { id: 5, name: "Toyota Corolla 2021", category: "Cars", location: "Surulere, Lagos", price: 20000, period: "day", image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400", status: "available", icon: "car" },
+            { id: 6, name: "Grand Event Hall", category: "Event Halls", location: "Victoria Island, Lagos", price: 150000, period: "day", image: "https://images.unsplash.com/photo-1519167758481-83f29da8ae8d?w=400", status: "available", icon: "warehouse" },
+            { id: 7, name: "Royal Banquet Hall", category: "Event Halls", location: "Ikeja GRA, Lagos", price: 200000, period: "day", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400", status: "available", icon: "warehouse" },
+            { id: 8, name: "Garden Reception Hall", category: "Event Halls", location: "Lekki, Lagos", price: 180000, period: "day", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400", status: "few-left", icon: "warehouse" },
+            { id: 9, name: "Pro Sound System", category: "Sound Equipment", location: "Ikeja, Lagos", price: 40000, period: "day", image: "https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?w=400", status: "available", icon: "volume-up" },
+            { id: 10, name: "DJ Equipment Set", category: "Sound Equipment", location: "Surulere, Lagos", price: 35000, period: "day", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400", status: "available", icon: "volume-up" },
+            { id: 11, name: "PA System with Mics", category: "Sound Equipment", location: "Yaba, Lagos", price: 30000, period: "day", image: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400", status: "available", icon: "volume-up" },
+            { id: 12, name: "3-Bedroom Short-let", category: "Apartments", location: "Lekki Phase 1, Lagos", price: 80000, period: "night", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400", status: "few-left", icon: "home" },
+            { id: 13, name: "2-Bedroom Apartment", category: "Apartments", location: "Ajah, Lagos", price: 50000, period: "night", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400", status: "available", icon: "home" },
+            { id: 14, name: "Luxury Penthouse", category: "Apartments", location: "Ikoyi, Lagos", price: 150000, period: "night", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400", status: "available", icon: "home" },
+            { id: 15, name: "Studio Apartment", category: "Apartments", location: "Ikeja, Lagos", price: 35000, period: "night", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400", status: "available", icon: "home" },
+            { id: 16, name: "40KVA Generator", category: "Equipment", location: "Ikeja, Lagos", price: 35000, period: "day", image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=400", status: "available", icon: "plug" },
+            { id: 17, name: "20KVA Generator", category: "Equipment", location: "Surulere, Lagos", price: 25000, period: "day", image: "https://images.unsplash.com/photo-1597522665214-8800d9bfb212?w=400", status: "available", icon: "plug" },
+            { id: 18, name: "Canopy Tent (20x20)", category: "Party Supplies", location: "Yaba, Lagos", price: 15000, period: "day", image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400", status: "available", icon: "gifts" },
+            { id: 19, name: "Tables & Chairs Set", category: "Party Supplies", location: "Ikeja, Lagos", price: 20000, period: "day", image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=400", status: "available", icon: "gifts" },
+            { id: 20, name: "Decorative Lighting", category: "Party Supplies", location: "Lekki, Lagos", price: 25000, period: "day", image: "https://images.unsplash.com/photo-1527838832700-5059252407fa?w=400", status: "available", icon: "gifts" },
+            { id: 21, name: "Professional Camera Kit", category: "Photography", location: "Victoria Island, Lagos", price: 50000, period: "day", image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400", status: "available", icon: "camera" },
+            { id: 22, name: "Drone with 4K Camera", category: "Photography", location: "Lekki, Lagos", price: 60000, period: "day", image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400", status: "available", icon: "camera" },
+            { id: 23, name: "Studio Lighting Set", category: "Photography", location: "Ikeja, Lagos", price: 30000, period: "day", image: "https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=400", status: "available", icon: "camera" }
+        ];
+
+        let filteredItems = [...items];
+        let activeCategory = "All";
+
+        const categories = ["All", ...new Set(items.map(item => item.category))];
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterByCategory('${cat}')" class="category-pill px-6 py-2 rounded-full border-2 border-gray-300 text-gray-700 font-medium ${cat === 'All' ? 'active' : ''}">
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function renderItems(itemsToRender) {
+            const grid = document.getElementById('itemsGrid');
+            const noResults = document.getElementById('noResults');
+            const itemCount = document.getElementById('itemCount');
+
+            itemCount.textContent = itemsToRender.length;
+
+            if (itemsToRender.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = itemsToRender.map(item => `
+                <div class="property-card bg-white rounded-2xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50">
+                            <i class="far fa-heart text-gray-700"></i>
+                        </button>
+                        <span class="absolute bottom-3 left-3 ${item.status === 'available' ? 'bg-green-500' : 'bg-yellow-500'} text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            ${item.status === 'available' ? 'Available' : 'Few Left'}
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">${item.name}</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center gap-1">
+                            <i class="fas fa-${item.icon} text-[#2F80ED]"></i>
+                            ${item.location} • ${item.category}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-[#2F80ED]">₦${item.price.toLocaleString()}</p>
+                                <p class="text-gray-500 text-sm">per ${item.period}</p>
+                            </div>
+                            <a href="booking-page.html" class="px-4 py-2 bg-blue-50 text-[#2F80ED] font-semibold rounded-lg hover:bg-blue-100">
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
+            activeCategory = category;
+            document.querySelectorAll('.category-pill').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === category) btn.classList.add('active');
+            });
+
+            filteredItems = category === "All" ? [...items] : items.filter(item => item.category === category);
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sortValue = document.getElementById('sortSelect').value;
+
+            let result = filteredItems.filter(item =>
+                item.name.toLowerCase().includes(searchTerm) ||
+                item.location.toLowerCase().includes(searchTerm) ||
+                item.category.toLowerCase().includes(searchTerm)
+            );
+
+            if (sortValue === 'price-low') result.sort((a, b) => a.price - b.price);
+            else if (sortValue === 'price-high') result.sort((a, b) => b.price - a.price);
+            else if (sortValue === 'name') result.sort((a, b) => a.name.localeCompare(b.name));
+
+            renderItems(result);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+        renderCategories();
+        renderItems(items);
+    </script>
+</body>
+
+</html>

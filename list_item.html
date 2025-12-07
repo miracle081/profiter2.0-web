@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Item - Profiter Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Montserrat', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #2F80ED 0%, #225291 100%); }
+        .btn-primary { background: #2F80ED; transition: all 0.3s ease; }
+        .btn-primary:hover { background: #1f6fd1; transform: translateY(-2px); box-shadow: 0 8px 20px -5px rgba(47, 128, 237, 0.4); }
+        .step-indicator { transition: all 0.3s ease; }
+        .step-indicator.active { background: #2F80ED; color: white; }
+        .step-indicator.completed { background: #10b981; color: white; }
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        .image-preview { position: relative; display: inline-block; margin: 8px; }
+        .image-preview img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; }
+        .image-preview button { position: absolute; top: -8px; right: -8px; }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                        <span class="text-xl font-bold text-gray-900">PROFITER</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">Home</a>
+                    <a href="listings.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">Browse Items</a>
+                    <a href="how-it-works.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">How It Works</a>
+                    <a href="contact-us.html" class="text-gray-700 hover:text-[#2F80ED] font-medium">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="hidden md:block px-4 py-2 text-[#2F80ED] font-semibold hover:bg-blue-50 rounded-lg">Sign In</a>
+                    <button class="md:hidden text-gray-700"><i class="fas fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4 lg:px-8 text-center">
+            <h1 class="text-4xl font-bold mb-2">List Your Item</h1>
+            <p class="text-white/90">Start earning from your idle items today</p>
+        </div>
+    </section>
+
+    <!-- Steps Indicator -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-center gap-4 max-w-2xl mx-auto">
+                <div class="flex items-center gap-2">
+                    <div class="step-indicator active w-10 h-10 rounded-full flex items-center justify-center font-semibold bg-gray-200 text-gray-600">1</div>
+                    <span class="hidden sm:inline text-sm font-medium text-gray-700">Basic Info</span>
+                </div>
+                <div class="w-12 h-0.5 bg-gray-300"></div>
+                <div class="flex items-center gap-2">
+                    <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-semibold bg-gray-200 text-gray-600">2</div>
+                    <span class="hidden sm:inline text-sm font-medium text-gray-700">Details</span>
+                </div>
+                <div class="w-12 h-0.5 bg-gray-300"></div>
+                <div class="flex items-center gap-2">
+                    <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-semibold bg-gray-200 text-gray-600">3</div>
+                    <span class="hidden sm:inline text-sm font-medium text-gray-700">Photos</span>
+                </div>
+                <div class="w-12 h-0.5 bg-gray-300"></div>
+                <div class="flex items-center gap-2">
+                    <div class="step-indicator w-10 h-10 rounded-full flex items-center justify-center font-semibold bg-gray-200 text-gray-600">4</div>
+                    <span class="hidden sm:inline text-sm font-medium text-gray-700">Pricing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form -->
+    <section class="py-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+                <form id="listingForm">
+                    <!-- Step 1: Basic Info -->
+                    <div class="form-step active" data-step="1">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Basic Information</h2>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Item Name *</label>
+                                <input type="text" required placeholder="e.g. Toyota Camry 2022" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Category *</label>
+                                <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                    <option value="">Select a category</option>
+                                    <option value="cars">Cars</option>
+                                    <option value="apartments">Apartments</option>
+                                    <option value="event-halls">Event Halls</option>
+                                    <option value="sound-equipment">Sound Equipment</option>
+                                    <option value="equipment">Equipment</option>
+                                    <option value="party-supplies">Party Supplies</option>
+                                    <option value="photography">Photography</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Location *</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <select required class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                        <option value="">State</option>
+                                        <option value="lagos">Lagos</option>
+                                        <option value="abuja">Abuja</option>
+                                        <option value="port-harcourt">Port Harcourt</option>
+                                        <option value="ibadan">Ibadan</option>
+                                        <option value="kano">Kano</option>
+                                    </select>
+                                    <input type="text" required placeholder="Area/District" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Condition *</label>
+                                <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                    <option value="">Select condition</option>
+                                    <option value="brand-new">Brand New</option>
+                                    <option value="excellent">Excellent</option>
+                                    <option value="good">Good</option>
+                                    <option value="fair">Fair</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mt-8">
+                            <button type="button" onclick="nextStep()" class="btn-primary px-8 py-3 text-white font-semibold rounded-lg">
+                                Next Step <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Details -->
+                    <div class="form-step" data-step="2">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Item Details</h2>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Description *</label>
+                                <textarea required rows="5" placeholder="Describe your item in detail..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"></textarea>
+                                <p class="text-sm text-gray-500 mt-1">Include features, specifications, and any important details</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Key Features</label>
+                                <div id="featuresContainer" class="space-y-2 mb-2">
+                                    <div class="flex gap-2">
+                                        <input type="text" placeholder="e.g. Air Conditioning" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                        <button type="button" onclick="removeFeature(this)" class="px-4 py-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="addFeature()" class="text-[#2F80ED] font-semibold hover:underline">
+                                    <i class="fas fa-plus mr-1"></i> Add Feature
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Year/Model (if applicable)</label>
+                                    <input type="text" placeholder="e.g. 2022" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Brand</label>
+                                    <input type="text" placeholder="e.g. Toyota" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Availability *</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <input type="date" required class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                    <input type="date" required class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">From - To dates</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-8">
+                            <button type="button" onclick="prevStep()" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50">
+                                <i class="fas fa-arrow-left mr-2"></i> Back
+                            </button>
+                            <button type="button" onclick="nextStep()" class="btn-primary px-8 py-3 text-white font-semibold rounded-lg">
+                                Next Step <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Photos -->
+                    <div class="form-step" data-step="3">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Upload Photos</h2>
+                        
+                        <div class="space-y-5">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                                <i class="fas fa-cloud-upload-alt text-5xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-700 font-semibold mb-2">Drag & drop images here</p>
+                                <p class="text-gray-500 text-sm mb-4">or click to browse</p>
+                                <input type="file" id="imageUpload" accept="image/*" multiple class="hidden" onchange="handleImageUpload(event)">
+                                <button type="button" onclick="document.getElementById('imageUpload').click()" class="btn-primary px-6 py-2 text-white font-semibold rounded-lg">
+                                    Choose Files
+                                </button>
+                                <p class="text-xs text-gray-500 mt-3">Upload up to 10 images (JPG, PNG - Max 5MB each)</p>
+                            </div>
+
+                            <div id="imagePreviewContainer" class="flex flex-wrap gap-2"></div>
+
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                                    <i class="fas fa-lightbulb text-[#2F80ED]"></i>
+                                    Photo Tips
+                                </h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Use good lighting and clear images</li>
+                                    <li>• Show multiple angles of the item</li>
+                                    <li>• Include close-up shots of important features</li>
+                                    <li>• First photo will be your main listing image</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-8">
+                            <button type="button" onclick="prevStep()" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50">
+                                <i class="fas fa-arrow-left mr-2"></i> Back
+                            </button>
+                            <button type="button" onclick="nextStep()" class="btn-primary px-8 py-3 text-white font-semibold rounded-lg">
+                                Next Step <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Pricing -->
+                    <div class="form-step" data-step="4">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Pricing & Terms</h2>
+                        
+                        <div class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Rental Price *</label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">₦</span>
+                                        <input type="number" required placeholder="0" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Rental Period *</label>
+                                    <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                        <option value="hour">Per Hour</option>
+                                        <option value="day" selected>Per Day</option>
+                                        <option value="week">Per Week</option>
+                                        <option value="month">Per Month</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Security Deposit *</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">₦</span>
+                                    <input type="number" required placeholder="0" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Refundable amount to protect against damage</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Minimum Rental Duration</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                    <option value="none">No Minimum</option>
+                                    <option value="1">1 Day</option>
+                                    <option value="2">2 Days</option>
+                                    <option value="3">3 Days</option>
+                                    <option value="7">1 Week</option>
+                                </select>
+                            </div>
+
+                            <div class="border-t pt-5">
+                                <h3 class="font-semibold text-gray-900 mb-3">Rental Terms</h3>
+                                <div class="space-y-3">
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input type="checkbox" class="mt-1 w-5 h-5 text-[#2F80ED] rounded border-gray-300 focus:ring-[#2F80ED]">
+                                        <span class="text-gray-700">Delivery available (additional charges may apply)</span>
+                                    </label>
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input type="checkbox" class="mt-1 w-5 h-5 text-[#2F80ED] rounded border-gray-300 focus:ring-[#2F80ED]">
+                                        <span class="text-gray-700">Accept instant bookings (auto-approve requests)</span>
+                                    </label>
+                                    <label class="flex items-start gap-3 cursor-pointer">
+                                        <input type="checkbox" checked required class="mt-1 w-5 h-5 text-[#2F80ED] rounded border-gray-300 focus:ring-[#2F80ED]">
+                                        <span class="text-gray-700">I agree to Profiter's <a href="#" class="text-[#2F80ED] hover:underline">Terms of Service</a> and <a href="#" class="text-[#2F80ED] hover:underline">Listing Policy</a></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Earnings Calculator</h4>
+                                <div class="text-sm text-gray-700">
+                                    <div class="flex justify-between mb-1">
+                                        <span>Your price per day:</span>
+                                        <span class="font-semibold">₦0</span>
+                                    </div>
+                                    <div class="flex justify-between mb-1">
+                                        <span>Platform fee (15%):</span>
+                                        <span class="font-semibold">- ₦0</span>
+                                    </div>
+                                    <div class="flex justify-between pt-2 border-t border-green-200">
+                                        <span class="font-bold">You earn per day:</span>
+                                        <span class="font-bold text-green-600">₦0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-8">
+                            <button type="button" onclick="prevStep()" class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50">
+                                <i class="fas fa-arrow-left mr-2"></i> Back
+                            </button>
+                            <button type="submit" class="btn-primary px-8 py-3 text-white font-semibold rounded-lg">
+                                <i class="fas fa-check mr-2"></i> Submit Listing
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                    <span class="text-xl font-bold text-white">PROFITER</span>
+                </div>
+                <p class="mb-4">Your trusted rental platform for December and beyond.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                <ul>
+                    <li class="mb-2"><a href="index.html" class="hover:text-white">Home</a></li>
+                    <li class="mb-2"><a href="listings.html" class="hover:text-white">Browse Items</a></li>
+                    <li class="mb-2"><a href="how-it-works.html" class="hover:text-white">How It Works</a></li>
+                    <li class="mb-2"><a href="contact-us.html" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Support</h4>
+                <ul>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Help Center</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Terms of Service</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="#" class="hover:text-white">FAQs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Contact Us</h4>
+                <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Rental St, Lagos, Nigeria</p>
+                <p class="mb-2"><i class="fas fa-phone mr-2"></i> +234 800 123 4567</p>
+                <p><i class="fas fa-envelope mr-2"></i>Email: profiter.ih@gmail.com</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-4 text-center">
+            <p>&copy; 2024 PROFITER Rentals. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const uploadedImages = [];
+
+        function nextStep() {
+            if (currentStep < 4) {
+                currentStep++;
+                updateStep();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep();
+            }
+        }
+
+        function updateStep() {
+            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+
+            document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+                indicator.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    indicator.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    indicator.classList.add('completed');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function addFeature() {
+            const container = document.getElementById('featuresContainer');
+            const div = document.createElement('div');
+            div.className = 'flex gap-2';
+            div.innerHTML = `
+                <input type="text" placeholder="Enter feature" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                <button type="button" onclick="removeFeature(this)" class="px-4 py-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(div);
+        }
+
+        function removeFeature(btn) {
+            btn.closest('.flex').remove();
+        }
+
+        function handleImageUpload(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                if (uploadedImages.length >= 10) {
+                    alert('Maximum 10 images allowed');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    uploadedImages.push(event.target.result);
+                    renderImagePreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderImagePreviews() {
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = uploadedImages.map((img, index) => `
+                <div class="image-preview">
+                    <img src="${img}" alt="Preview">
+                    <button type="button" onclick="removeImage(${index})" class="w-8 h-8 bg-red-500 text-white rounded-full hover:bg-red-600">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(index) {
+            uploadedImages.splice(index, 1);
+            renderImagePreviews();
+        }
+
+        document.getElementById('listingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Listing submitted successfully! Our team will review it within 24 hours.');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

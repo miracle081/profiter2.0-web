@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Item - Profiter Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Montserrat', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #2F80ED 0%, #225291 100%); }
+        .btn-primary {
+            background: #2F80ED;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1f6fd1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(47, 128, 237, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                    <span class="text-xl font-bold text-gray-900">PROFITER</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button class="text-gray-700 hover:text-[#2F80ED]">
+                        <i class="fas fa-arrow-left mr-2"></i>Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 lg:px-8 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-semibold text-[#2F80ED]">Step 1 of 3</span>
+                    <span class="text-sm text-gray-600">Booking Details</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-[#2F80ED] h-2 rounded-full transition-all" style="width: 33%"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Booking Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-md p-6 lg:p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Complete Your Booking</h2>
+
+                        <!-- Rental Period -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Rental Period</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Start Date</label>
+                                    <div class="relative">
+                                        <i class="fas fa-calendar absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="date" id="startDate" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]" value="2024-12-15">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">End Date</label>
+                                    <div class="relative">
+                                        <i class="fas fa-calendar absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        <input type="date" id="endDate" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]" value="2024-12-20">
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <i class="fas fa-info-circle text-[#2F80ED] mr-1"></i>
+                                <span id="rentalDays">5 days</span> rental period
+                            </p>
+                        </div>
+
+                        <!-- Personal Information -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" placeholder="John Doe" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" placeholder="+234 800 000 0000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input type="email" placeholder="john@example.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                            </div>
+                        </div>
+
+                        <!-- Delivery Details -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Delivery Details</h3>
+                            <div class="mb-4">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Delivery Address</label>
+                                <textarea rows="3" placeholder="Enter full delivery address" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"></textarea>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="freeDelivery" class="w-4 h-4 text-[#2F80ED] rounded focus:ring-[#2F80ED]" checked>
+                                <label for="freeDelivery" class="text-sm text-gray-700">
+                                    <i class="fas fa-truck text-green-500 mr-1"></i>
+                                    Free delivery within Lagos
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Additional Options -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Additional Options</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-[#2F80ED] transition">
+                                    <input type="checkbox" class="w-4 h-4 text-[#2F80ED] rounded focus:ring-[#2F80ED]">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-900">Damage Protection</p>
+                                        <p class="text-sm text-gray-600">Cover accidental damages up to ₦100,000</p>
+                                    </div>
+                                    <span class="font-semibold text-[#2F80ED]">+₦5K</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-[#2F80ED] transition">
+                                    <input type="checkbox" class="w-4 h-4 text-[#2F80ED] rounded focus:ring-[#2F80ED]">
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-gray-900">Professional Driver</p>
+                                        <p class="text-sm text-gray-600">Experienced driver included</p>
+                                    </div>
+                                    <span class="font-semibold text-[#2F80ED]">+₦15K/day</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Special Requests -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Special Requests (Optional)</label>
+                            <textarea rows="3" placeholder="Any special requirements or notes..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-md p-6 sticky top-24">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Order Summary</h3>
+
+                        <!-- Item Details -->
+                        <div class="flex gap-4 mb-6 pb-6 border-b">
+                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400" alt="Car" class="w-20 h-20 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Toyota Camry 2022</h4>
+                                <p class="text-sm text-gray-600">Lekki, Lagos</p>
+                                <p class="text-sm text-[#2F80ED] font-semibold mt-1">₦25K per day</p>
+                            </div>
+                        </div>
+
+                        <!-- Price Breakdown -->
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-gray-700">
+                                <span>Rental (5 days)</span>
+                                <span class="font-semibold">₦125,000</span>
+                            </div>
+                            <div class="flex justify-between text-gray-700">
+                                <span>Service Fee</span>
+                                <span class="font-semibold">₦5,000</span>
+                            </div>
+                            <div class="flex justify-between text-green-600">
+                                <span>Free Delivery</span>
+                                <span class="font-semibold">-₦0</span>
+                            </div>
+                        </div>
+
+                        <!-- Total -->
+                        <div class="pt-4 border-t">
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="text-lg font-bold text-gray-900">Total</span>
+                                <span class="text-2xl font-bold text-[#2F80ED]">₦130,000</span>
+                            </div>
+
+                            <button class="btn-primary w-full py-4 text-white font-semibold rounded-lg mb-3">
+                                Proceed to Payment
+                            </button>
+
+                            <p class="text-xs text-gray-600 text-center">
+                                <i class="fas fa-lock mr-1"></i>
+                                Secure payment with SSL encryption
+                            </p>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div class="mt-6 pt-6 border-t space-y-2">
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span>Verified & Insured Items</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="fas fa-shield-alt text-green-500"></i>
+                                <span>100% Payment Protection</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class="fas fa-undo text-green-500"></i>
+                                <span>Free Cancellation (24hrs)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const rentalDaysSpan = document.getElementById('rentalDays');
+
+        function calculateDays() {
+            const start = new Date(startDateInput.value);
+            const end = new Date(endDateInput.value);
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            rentalDaysSpan.textContent = `${diffDays} days`;
+        }
+
+        startDateInput.addEventListener('change', calculateDays);
+        endDateInput.addEventListener('change', calculateDays);
+    </script>
+</body>
+</html>
