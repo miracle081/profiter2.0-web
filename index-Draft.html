@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profiter Rentals - Find Your Perfect Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #2F80ED 0%, #225291 100%);
+        }
+
+        .btn-primary {
+            background: #2F80ED;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #1f6fd1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(47, 128, 237, 0.4);
+        }
+
+        .property-card {
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card {
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px -5px rgba(47, 128, 237, 0.3);
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">]
+                    <img src="images/logo.png" alt="logo" class="w-10 h-10">
+                    <span class="text-xl font-bold text-gray-900">PROFITER</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#" class="text-gray-700 hover:text-[#2F80ED] font-medium">Home</a>
+                    <a href="#" class="text-gray-700 hover:text-[#2F80ED] font-medium">Properties</a>
+                    <a href="#" class="text-gray-700 hover:text-[#2F80ED] font-medium">About</a>
+                    <a href="#" class="text-gray-700 hover:text-[#2F80ED] font-medium">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button class="hidden md:block px-4 py-2 text-[#2F80ED] font-semibold hover:bg-blue-50 rounded-lg">
+                        Sign In
+                    </button>
+                    <button class="btn-primary px-4 py-2 text-white font-semibold rounded-lg">
+                        List Property
+                    </button>
+                    <button class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 lg:py-28">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h1 class="text-4xl lg:text-6xl font-bold mb-4">Find Your Perfect Home</h1>
+                <p class="text-lg lg:text-xl text-white/90">Discover verified properties across Nigeria. Rent smarter,
+                    live better.</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl p-4 lg:p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="lg:col-span-1">
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">Location</label>
+                        <div class="relative">
+                            <i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input type="text" placeholder="e.g. Lekki, Abuja"
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">Property Type</label>
+                        <select
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                            <option>All Types</option>
+                            <option>Apartment</option>
+                            <option>Duplex</option>
+                            <option>Studio</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">Bedrooms</label>
+                        <select
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                            <option>Any</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">Price Range</label>
+                        <select
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2F80ED]">
+                            <option>Any Price</option>
+                            <option>₦500k - ₦1M</option>
+                            <option>₦1M - ₦2M</option>
+                            <option>₦2M - ₦5M</option>
+                            <option>₦5M+</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-end">
+                        <button
+                            class="btn-primary w-full py-3 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="py-16 lg:py-20">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">Featured Properties</h2>
+                    <p class="text-gray-600 mt-1">Handpicked homes for you</p>
+                </div>
+                <a href="#" class="text-[#2F80ED] font-semibold hover:underline">View All</a>
+            </div>
+
+            <div class="scroll-container flex gap-6 pb-4">
+                <!-- Property Card 1 -->
+                <div
+                    class="property-card bg-white rounded-2xl shadow-md overflow-hidden min-w-[300px] lg:min-w-[340px]">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400" alt="Property"
+                            class="w-full h-56 object-cover">
+                        <button
+                            class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50">
+                            <i class="far fa-heart text-gray-700"></i>
+                        </button>
+                        <span
+                            class="absolute bottom-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            Available
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">3-Bedroom Apartment</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center gap-1">
+                            <i class="fas fa-map-marker-alt text-[#2F80ED]"></i>
+                            Lekki Phase 1, Lagos
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-[#2F80ED]">₦2.5M</p>
+                                <p class="text-gray-500 text-sm">per year</p>
+                            </div>
+                            <button
+                                class="px-4 py-2 bg-blue-50 text-[#2F80ED] font-semibold rounded-lg hover:bg-blue-100">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div
+                    class="property-card bg-white rounded-2xl shadow-md overflow-hidden min-w-[300px] lg:min-w-[340px]">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400" alt="Property"
+                            class="w-full h-56 object-cover">
+                        <button
+                            class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50">
+                            <i class="far fa-heart text-gray-700"></i>
+                        </button>
+                        <span
+                            class="absolute bottom-3 left-3 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            Occupied Soon
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Luxury Duplex</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center gap-1">
+                            <i class="fas fa-map-marker-alt text-[#2F80ED]"></i>
+                            Ikoyi, Lagos
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-[#2F80ED]">₦5M</p>
+                                <p class="text-gray-500 text-sm">per year</p>
+                            </div>
+                            <button
+                                class="px-4 py-2 bg-blue-50 text-[#2F80ED] font-semibold rounded-lg hover:bg-blue-100">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div
+                    class="property-card bg-white rounded-2xl shadow-md overflow-hidden min-w-[300px] lg:min-w-[340px]">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400" alt="Property"
+                            class="w-full h-56 object-cover">
+                        <button
+                            class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50">
+                            <i class="far fa-heart text-gray-700"></i>
+                        </button>
+                        <span
+                            class="absolute bottom-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            Available
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Modern Studio Flat</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center gap-1">
+                            <i class="fas fa-map-marker-alt text-[#2F80ED]"></i>
+                            Wuse 2, Abuja
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-[#2F80ED]">₦800K</p>
+                                <p class="text-gray-500 text-sm">per year</p>
+                            </div>
+                            <button
+                                class="px-4 py-2 bg-blue-50 text-[#2F80ED] font-semibold rounded-lg hover:bg-blue-100">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 4 -->
+                <div
+                    class="property-card bg-white rounded-2xl shadow-md overflow-hidden min-w-[300px] lg:min-w-[340px]">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400" alt="Property"
+                            class="w-full h-56 object-cover">
+                        <button
+                            class="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-50">
+                            <i class="far fa-heart text-gray-700"></i>
+                        </button>
+                        <span
+                            class="absolute bottom-3 left-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            Available
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">4-Bedroom Detached</h3>
+                        <p class="text-gray-600 text-sm mb-3 flex items-center gap-1">
+                            <i class="fas fa-map-marker-alt text-[#2F80ED]"></i>
+                            Maitama, Abuja
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-[#2F80ED]">₦7M</p>
+                                <p class="text-gray-500 text-sm">per year</p>
+                            </div>
+                            <button
+                                class="px-4 py-2 bg-blue-50 text-[#2F80ED] font-semibold rounded-lg hover:bg-blue-100">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Categories -->
+    <section class="py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Browse by Category</h2>
+                <p class="text-gray-600">Find the perfect property type for your lifestyle</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-building text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Apartments</h3>
+                </div>
+
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-clock text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Short-let</h3>
+                </div>
+
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-home text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Duplexes</h3>
+                </div>
+
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-door-open text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Studios</h3>
+                </div>
+
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-crown text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Luxury</h3>
+                </div>
+
+                <div class="category-card bg-gray-50 rounded-xl p-6 text-center cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-users text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900">Shared</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Profiter -->
+    <section class="py-16 lg:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Why Choose Profiter</h2>
+                <p class="text-gray-600">Your trusted partner in finding the perfect home</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Verified Properties</h3>
+                    <p class="text-gray-600 text-sm">All listings thoroughly inspected</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Secure Payments</h3>
+                    <p class="text-gray-600 text-sm">Safe and encrypted transactions</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-tie text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Professional Agents</h3>
+                    <p class="text-gray-600 text-sm">Expert guidance every step</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-ban text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Zero Hidden Fees</h3>
+                    <p class="text-gray-600 text-sm">Transparent pricing always</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 text-center">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-[#2F80ED] text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Smooth Process</h3>
+                    <p class="text-gray-600 text-sm">Quick and hassle-free rental</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">What Our Clients Say</h2>
+                <p class="text-gray-600">Real experiences from real people</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/100?img=1" alt="User" class="w-12 h-12 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Chioma Adeleke</h4>
+                            <p class="text-gray-600 text-sm">Lagos, Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">"Found my dream apartment in Lekki within days. The process was seamless
+                        and the team was incredibly helpful!"</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/100?img=33" alt="User" class="w-12 h-12 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Ibrahim Musa</h4>
+                            <p class="text-gray-600 text-sm">Abuja, Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600">"Profiter made relocating to Abuja stress-free. Verified properties and
+                        transparent pricing. Highly recommend!"</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://i.pravatar.cc/100?img=5" alt="User" class="w-12 h-12 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Blessing Okafor</h4>
+                            <p class="text-gray-600 text-sm">Port Harcourt, Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600">"Best real estate platform in Nigeria! Professional service and amazing
+                        property selection. Worth every naira."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="gradient-bg py-16 lg:py-20">
+        <div class="container mx-auto px-4 lg:px-8 text-center">
+            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Find Your Perfect Home?</h2>
+            <p class="text-white/90 text-lg mb-8">Join thousands of Nigerians who trust Profiter for their rental needs
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                    class="bg-white text-[#2F80ED] px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition">
+                    Explore Properties
+                </button>
+                <button
+                    class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-[#2F80ED] transition">
+                    List Your Property
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <!-- <div class="w-10 h-10 bg-[#2F80ED] rounded-full flex items-center justify-center">
+                            <i class="fas fa-building text-white"></i>
+                        </div> -->
+                        <img src="images/logo.png" alt="logo" class="w-10 h-10">
+
+                        <span class="text-xl font-bold">PROFITER</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Making home rental seamless across Nigeria.</p>
+                    <div class="flex gap-3">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#2F80ED] transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition">Properties</a></li>
+                        <li><a href="#" class="hover:text-white transition">About</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <p class="text-gray-400 mb-2">123 Profiter St, Lagos, Nigeria</p>
+                    <p class="text-gray-400 mb-2">Email: profiter.ih@gmail.com</p>
+                    <p class="text-gray-400">Phone: +234 800 123 4567</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-500">
+                &copy; 2024 Profiter Rentals. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

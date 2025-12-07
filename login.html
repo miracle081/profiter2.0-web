@@ -63,8 +63,8 @@
     <div class="w-full max-w-md relative z-10">
         <!-- Logo -->
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4 shadow-lg">
-                <i class="fas fa-building text-3xl text-[#2F80ED]"></i>
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4 shadow-lg p-3">
+                <img src="images/logo.png" alt="logo">
             </div>
             <h1 class="text-4xl font-bold text-white mb-2">PROFITER</h1>
             <p class="text-white/80">Welcome back! Login to continue</p>
@@ -116,7 +116,7 @@
                             class="w-4 h-4 text-[#2F80ED] border-gray-300 rounded focus:ring-[#2F80ED]">
                         <span class="ml-2 text-sm text-gray-600">Remember me</span>
                     </label>
-                    <a href="#" class="text-sm text-[#2F80ED] hover:underline font-semibold">
+                    <a href="forgot-password.html" class="text-sm text-[#2F80ED] hover:underline font-semibold">
                         Forgot password?
                     </a>
                 </div>
@@ -159,6 +159,8 @@
 
             console.log('Login attempt:', { email, password });
             // Add your login logic here
+            // navigate to index.html
+            window.location.href = 'index.html';
         });
     </script>
 </body>
